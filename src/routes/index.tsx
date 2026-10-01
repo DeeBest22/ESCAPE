@@ -49,7 +49,7 @@ const TONE: Record<Difficulty, string> = {
 };
 const STORAGE_KEY = "escape:progress";
 const HINTS_PER_LEVEL = 2;
-const INFINITE_HINTS = true; // testing only: set false before release
+const INFINITE_HINTS = false; // testing only: set false before release
 
 function formatTime(total: number) {
   const m = Math.floor(total / 60)
