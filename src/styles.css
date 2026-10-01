@@ -1,0 +1,275 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * ESCAPE — design system.
+ * All colours are oklch tokens. Components must use semantic tokens only.
+ */
+
+@theme inline {
+    --animate-slide-track: slide-track 1.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  --animate-screen-in: screen-in 0.55s ease-out both;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-easy: var(--easy);
+  --color-medium: var(--medium);
+  --color-hard: var(--hard);
+  --color-gold: var(--star-gold);
+  --color-board: var(--board);
+  --color-board-wall: var(--board-wall);
+  --font-display: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --animate-star-pop: star-pop 0.9s ease-out both;
+  --animate-rise: rise 0.35s ease-out both;
+}
+
+:root {
+  color-scheme: dark;
+  --radius: 1rem;
+
+  --background: oklch(0.18 0.012 260);
+  --foreground: oklch(0.95 0.005 250);
+  --card: oklch(0.23 0.012 260);
+  --card-foreground: oklch(0.95 0.005 250);
+  --popover: oklch(0.23 0.012 260);
+  --popover-foreground: oklch(0.95 0.005 250);
+  --primary: oklch(0.92 0.005 250);
+  --primary-foreground: oklch(0.2 0.012 260);
+  --secondary: oklch(0.29 0.014 260);
+  --secondary-foreground: oklch(0.95 0.005 250);
+  --muted: oklch(0.29 0.014 260);
+  --muted-foreground: oklch(0.7 0.01 250);
+  --accent: oklch(0.72 0.19 28);
+  --accent-foreground: oklch(0.98 0.01 95);
+  --destructive: oklch(0.62 0.23 27);
+  --destructive-foreground: oklch(0.98 0.01 95);
+  --border: oklch(0.32 0.012 260);
+  --input: oklch(0.32 0.012 260);
+  --ring: oklch(0.8 0.01 250);
+
+  --easy: oklch(0.76 0.2 145);
+  --medium: oklch(0.72 0.18 285);
+  --hard: oklch(0.7 0.22 350);
+
+  --board: oklch(0.25 0.012 260);
+  --board-wall: oklch(0.4 0.015 260);
+  --board-line: oklch(0.31 0.012 260);
+
+  --star-gold: oklch(0.82 0.15 85);
+  --star-violet: oklch(0.72 0.2 310);
+
+  /* vehicle palette (unchanged) */
+  --car-red: oklch(0.63 0.23 25);
+  --car-cream: oklch(0.89 0.05 85);
+  --car-sand: oklch(0.82 0.07 75);
+  --car-lilac: oklch(0.78 0.08 300);
+  --car-violet: oklch(0.68 0.1 300);
+  --car-mint: oklch(0.82 0.08 165);
+  --car-sky: oklch(0.8 0.08 230);
+  --car-slate: oklch(0.72 0.02 250);
+  --car-white: oklch(0.94 0.005 250);
+  --car-glass: oklch(0.3 0.02 250 / 55%);
+  --car-cabin: oklch(0.22 0.02 250 / 70%);
+  --car-cargo: oklch(0.25 0.02 250);
+  --car-tyre: oklch(0.2 0.01 250);
+  --car-gloss: oklch(1 0 0 / 14%);
+  --car-shade: oklch(0 0 0 / 14%);
+  --car-light: oklch(0.95 0.1 95 / 85%);
+  --car-arrow: oklch(0.98 0.01 95);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-display);
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@utility board-frame {
+  position: relative;
+  border-radius: 1rem;
+  padding: 0.4rem;
+  background: var(--board-wall);
+  box-shadow: 0 2px 6px oklch(0.3 0.01 250 / 12%);
+}
+
+@utility board-surface {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border-radius: 0.6rem;
+  background: var(--board);
+  overflow: visible;
+}
+
+@utility board-cell {
+  border: 1px solid var(--board-line);
+}
+
+@utility board-exit {
+  position: absolute;
+  right: -0.4rem;
+  width: 0.45rem;
+  background: var(--board);
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+}
+
+@utility vehicle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  touch-action: none;
+  user-select: none;
+  will-change: transform;
+}
+
+@utility vehicle-settling {
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease-out;
+}
+
+@utility vehicle-dragging {
+  transition: none;
+}
+
+@utility vehicle-hint {
+  animation: hint-pulse 1s ease-in-out infinite;
+}
+
+@utility exit-chevrons {
+  display: block;
+  width: 14px;
+  height: 28px;
+  background:
+    linear-gradient(transparent, transparent);
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid oklch(0.5 0.008 250);
+    border-top: 2px solid oklch(0.5 0.008 250);
+    transform: rotate(45deg);
+  }
+
+  &::before {
+    top: 2px;
+  }
+
+  &::after {
+    top: 15px;
+  }
+}
+
+@utility pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  transition:
+    transform 0.15s ease-out,
+    filter 0.15s ease-out;
+
+  &:active {
+    transform: scale(0.92);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+  }
+}
+
+@keyframes hint-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes star-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotate(-40deg);
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.25) rotate(25deg) translateY(-14px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}@keyframes slide-track {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+
+@keyframes screen-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
